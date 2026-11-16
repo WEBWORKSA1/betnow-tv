@@ -1,0 +1,32 @@
+---
+layout: default
+title: "Elo Ratings Explained: From Chess to the NBA | BetNow.tv"
+description: "How Elo ratings work, how to convert rating gaps into win probabilities, and how sports analysts adapt Elo for home advantage and margin."
+canon: "https://betnow.tv/learn/elo-ratings-explained.html"
+og: "article"
+p: "../"
+ld: '{"@context": "https://schema.org", "@type": "Article", "headline": "Elo Ratings Explained: From Chess to the NBA", "description": "How Elo ratings work, how to convert rating gaps into win probabilities, and how sports analysts adapt Elo for home advantage and margin.", "author": {"@type": "Organization", "name": "BetNow.tv Analytics Desk"}, "publisher": {"@type": "Organization", "name": "BetNow.tv"}, "dateModified": "2026-11-16", "mainEntityOfPage": "https://betnow.tv/learn/elo-ratings-explained.html"}'
+---
+<section class="page-hero"><div class="container article">
+<div class="breadcrumb"><a href="../index.html">Home</a> / <a href="../learn.html">Learn</a> / Models</div>
+<span class="tag lime">Models</span><h1 class="mt">Elo Ratings Explained: From Chess to the NBA</h1>
+<p class="meta">By the BetNow.tv Analytics Desk · 6 min read · Updated 2026-11-16</p>
+
+<p>Arpad Elo designed his rating system for chess in the 1960s. Today variants power rankings in soccer, American football, basketball, esports and more, because the core idea is elegant: every result moves ratings by an amount proportional to how surprising it was.</p>
+<h2>The win-probability formula</h2>
+<p>For teams A and B with ratings R<sub>A</sub> and R<sub>B</sub>:</p>
+<p class="callout"><b>P(A wins) = 1 ÷ (1 + 10<sup>(R<sub>B</sub> − R<sub>A</sub>) / 400</sup>)</b></p>
+<p>A 100-point gap gives the stronger side about 64%; 200 points ≈ 76%; 400 points ≈ 91%.</p>
+<h2>Updating after a game</h2>
+<p>New rating = old rating + K × (actual result − expected result), where the result is 1 for a win, 0.5 for a draw and 0 for a loss. K controls how fast ratings react: high K for short seasons (NFL), lower K for long ones (NBA, MLB).</p>
+<h2>Sports-specific tweaks</h2>
+<ul><li><b>Home advantage:</b> add a fixed bonus to the home side's rating before computing probability (often 50–100 points depending on sport).</li>
+<li><b>Margin of victory:</b> scale K by a function of the score margin so blowouts count more, with an autocorrelation adjustment so favourites are not over-rewarded.</li>
+<li><b>Season reversion:</b> pull ratings partway toward the mean between seasons to reflect roster turnover.</li></ul>
+<p>Try it with our <a href="../tools.html#elo">Elo probability calculator</a>, including a home-advantage input.</p>
+<h2>Strengths and limits</h2>
+<p>Elo needs only results, so it works in any sport with a schedule. It self-corrects and is easy to explain. Its limits: it does not know about injuries or trades until results arrive, and it treats every game as equally informative unless you adjust K. Good analysts combine Elo with player-level data for a fuller picture.</p>
+
+<div class="card mt"><h3>Keep learning</h3><p>Next: <a href="home-advantage-by-sport.html">Home Advantage: How Much Is It Worth in Each Sport?</a></p>
+<p class="muted">Get one 3-minute lesson every Sunday in the free Edge Report.</p><a class="btn btn-primary btn-sm" href="../edge.html">Get the Edge Report</a></div>
+</div></section>

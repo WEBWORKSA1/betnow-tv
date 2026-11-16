@@ -1,0 +1,36 @@
+---
+layout: default
+title: "How Poisson Models Predict Soccer Scores | BetNow.tv"
+description: "A step-by-step guide to the Poisson distribution for soccer: expected goals, scoreline probabilities and its known weaknesses."
+canon: "https://betnow.tv/learn/poisson-soccer-predictions.html"
+og: "article"
+p: "../"
+ld: '{"@context": "https://schema.org", "@type": "Article", "headline": "How Poisson Models Predict Soccer Scores", "description": "A step-by-step guide to the Poisson distribution for soccer: expected goals, scoreline probabilities and its known weaknesses.", "author": {"@type": "Organization", "name": "BetNow.tv Analytics Desk"}, "publisher": {"@type": "Organization", "name": "BetNow.tv"}, "dateModified": "2026-11-16", "mainEntityOfPage": "https://betnow.tv/learn/poisson-soccer-predictions.html"}'
+---
+<section class="page-hero"><div class="container article">
+<div class="breadcrumb"><a href="../index.html">Home</a> / <a href="../learn.html">Learn</a> / Models</div>
+<span class="tag lime">Models</span><h1 class="mt">How Poisson Models Predict Soccer Scores</h1>
+<p class="meta">By the BetNow.tv Analytics Desk · 8 min read · Updated 2026-11-16</p>
+
+<p>Goals in soccer are rare, roughly independent events — which makes them a natural fit for the Poisson distribution. With just two numbers, each team's expected goals, a Poisson model produces a probability for every possible scoreline, and from those, win/draw/loss and over/under figures.</p>
+<h2>Step 1 — estimate expected goals (λ)</h2>
+<p>A simple approach uses attack and defence strength relative to league average:</p>
+<ul><li><b>Home attack strength</b> = home team's home goals per game ÷ league average home goals.</li>
+<li><b>Away defence strength</b> = away team's goals conceded away ÷ league average away goals conceded.</li>
+<li><b>Home λ</b> = home attack × away defence × league average home goals.</li></ul>
+<p>Repeat in reverse for the away side. Modern analysts often replace raw goals with xG (expected goals from shot quality), which is more stable over small samples.</p>
+<h2>Step 2 — scoreline probabilities</h2>
+<p>The probability a team scores exactly <i>k</i> goals is e<sup>−λ</sup> λ<sup>k</sup> ÷ k!. Multiply the home and away probabilities for each pair to get a grid of scorelines — 0–0, 1–0, 1–1 and so on.</p>
+<h2>Step 3 — aggregate</h2>
+<p>Sum cells where home goals exceed away goals for a home win, the diagonal for a draw, and the rest for an away win. Sum cells where total goals exceed 2 for "over 2.5". Our <a href="../tools.html#poisson">Poisson predictor</a> does all of this live.</p>
+<div class="callout"><b>Worked example:</b> Home λ = 1.6, Away λ = 1.1 gives roughly Home 49%, Draw 25%, Away 26%, with 1–1 the single likeliest score and 1–0 close behind.</div>
+<h2>Known weaknesses</h2>
+<ul><li><b>Draws are underestimated.</b> Low scores are slightly correlated (game states, tactics). The Dixon–Coles adjustment (1997) corrects low-score cells.</li>
+<li><b>Team strength changes.</b> Weighting recent matches more heavily (time decay) helps.</li>
+<li><b>Context is missing.</b> Injuries, rotation, motivation and weather are not in the raw numbers.</li></ul>
+<h2>Why it is still useful</h2>
+<p>Poisson models are transparent, fast and surprisingly competitive as a baseline. They are a superb learning tool: every assumption is visible, so you can see exactly why a model disagrees with consensus. Our daily soccer predictions on the <a href="../predictions.html">Predictions</a> page use a Poisson-style approach built from current league tables.</p>
+
+<div class="card mt"><h3>Keep learning</h3><p>Next: <a href="elo-ratings-explained.html">Elo Ratings Explained: From Chess to the NBA</a></p>
+<p class="muted">Get one 3-minute lesson every Sunday in the free Edge Report.</p><a class="btn btn-primary btn-sm" href="../edge.html">Get the Edge Report</a></div>
+</div></section>

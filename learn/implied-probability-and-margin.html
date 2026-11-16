@@ -1,0 +1,34 @@
+---
+layout: default
+title: "Implied Probability and Margin: Finding the Fair Price | BetNow.tv"
+description: "Learn how to calculate the margin built into a market and remove it to reveal fair probabilities — with worked examples."
+canon: "https://betnow.tv/learn/implied-probability-and-margin.html"
+og: "article"
+p: "../"
+ld: '{"@context": "https://schema.org", "@type": "Article", "headline": "Implied Probability and Margin: Finding the Fair Price", "description": "Learn how to calculate the margin built into a market and remove it to reveal fair probabilities — with worked examples.", "author": {"@type": "Organization", "name": "BetNow.tv Analytics Desk"}, "publisher": {"@type": "Organization", "name": "BetNow.tv"}, "dateModified": "2026-11-16", "mainEntityOfPage": "https://betnow.tv/learn/implied-probability-and-margin.html"}'
+---
+<section class="page-hero"><div class="container article">
+<div class="breadcrumb"><a href="../index.html">Home</a> / <a href="../learn.html">Learn</a> / Math</div>
+<span class="tag lime">Math</span><h1 class="mt">Implied Probability and Margin: Finding the Fair Price</h1>
+<p class="meta">By the BetNow.tv Analytics Desk · 6 min read · Updated 2026-11-16</p>
+
+<p>Implied probability is the chance of an outcome according to a price. Margin is the extra percentage built into a full market. Together they let you translate any line into a clean, fair forecast you can compare with a model.</p>
+<h2>Step 1 — convert each outcome</h2>
+<p>Take a soccer match priced at Home 2.10, Draw 3.40, Away 3.60. Implied probabilities are 1/2.10 = 47.6%, 1/3.40 = 29.4%, 1/3.60 = 27.8%.</p>
+<h2>Step 2 — add them up</h2>
+<p>47.6 + 29.4 + 27.8 = 104.8%. The margin is the amount above 100%: <b>4.8%</b>. The "payout rate" is 100 ÷ 104.8 = 95.4%, meaning that in the long run only 95.4% of money staked on this market would be returned across all outcomes.</p>
+<h2>Step 3 — normalise to remove the margin</h2>
+<p>The simplest approach (proportional normalisation) divides each implied probability by the total:</p>
+<ul><li>Home: 47.6 ÷ 1.048 = 45.4%</li><li>Draw: 29.4 ÷ 1.048 = 28.1%</li><li>Away: 27.8 ÷ 1.048 = 26.5%</li></ul>
+<p>These now sum to 100% and represent the market's fair view.</p>
+<div class="callout">Try it yourself with the <a href="../tools.html#margin">margin calculator</a> — enter two or three prices and see the margin and fair probabilities update live.</div>
+<h2>Better normalisation methods</h2>
+<p>Proportional normalisation assumes the margin is spread evenly. In reality, longshots often carry more of it — the well-documented <b>favourite–longshot bias</b>. Analysts therefore use alternatives such as the "power" method (raising probabilities to an exponent until they sum to 1) or Shin's method, which models a share of informed money. For two-outcome markets the differences are small; for multi-runner markets (golf, racing, outrights) they can be large.</p>
+<h2>Why this matters for prediction</h2>
+<p>A prediction model is only interesting relative to a benchmark. If our model says the home side wins 52% and the fair market says 45%, that seven-point gap is a hypothesis worth investigating: is the model missing an injury, or is the market overreacting to a recent loss? Learning to compute fair probability is the first step in thinking like an analyst rather than a fan.</p>
+<h2>Common mistakes</h2>
+<ul><li>Comparing a model to raw (margin-included) probabilities — this makes every outcome look overpriced.</li><li>Ignoring the draw in soccer — two-way thinking in a three-way sport distorts every number.</li><li>Treating a single price as truth — prices move as information arrives.</li></ul>
+
+<div class="card mt"><h3>Keep learning</h3><p>Next: <a href="expected-value-explained.html">Expected Value (EV) Explained for Sports Fans</a></p>
+<p class="muted">Get one 3-minute lesson every Sunday in the free Edge Report.</p><a class="btn btn-primary btn-sm" href="../edge.html">Get the Edge Report</a></div>
+</div></section>
