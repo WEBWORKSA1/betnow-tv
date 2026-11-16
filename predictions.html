@@ -1,0 +1,24 @@
+---
+layout: default
+title: "Free Sports Predictions Today — Model Probabilities | BetNow.tv"
+description: "Daily auto-updated sports predictions with win, draw and loss probabilities for soccer, NFL, NBA, NHL and MLB. Free, transparent methodology."
+canon: "https://betnow.tv/predictions.html"
+og: "website"
+p: ""
+ld: "{\"@context\": \"https://schema.org\", \"@type\": \"WebPage\", \"name\": \"Free Sports Predictions Today \\u2014 Model Probabilities | BetNow.tv\", \"url\": \"https://betnow.tv/predictions.html\", \"description\": \"Daily auto-updated sports predictions with win, draw and loss probabilities for soccer, NFL, NBA, NHL and MLB. Free, transparent methodology.\", \"isPartOf\": {\"@type\": \"WebSite\", \"name\": \"BetNow.tv\", \"url\": \"https://betnow.tv/\"}}"
+---
+<section class="page-hero"><div class="container"><div class="breadcrumb"><a href="index.html">Home</a> / Predictions</div><span class="eyebrow">Auto-updated daily</span><h1>Sports predictions & model probabilities</h1><p class="mt">Win/draw/loss probabilities for upcoming games across top leagues, refreshed automatically from public fixture and standings data. Save picks, then enter them in the free contest.</p></div></section>
+<section style="padding-top:10px"><div class="container">
+ <div class="section-head"><div id="fxFilters" class="filters"></div><div class="muted">Last update: <b id="fxUpdated">—</b> · Your picks: <b data-pickcount>0</b> · <a href="contests.html">Submit picks →</a></div></div>
+ <div class="grid g3" id="fixtures"><p class="muted">Loading predictions…</p></div>
+</div></section>
+<section><div class="container article">
+ <h2>Methodology</h2>
+ <p><b>Soccer</b> forecasts use a Poisson goals model. Each club's attack and defence strength comes from current-season goals scored and conceded per game relative to the league average, with a home-advantage factor. We compute the full scoreline grid and sum home-win, draw and away-win probabilities. <a href="learn/poisson-soccer-predictions.html">How Poisson models work →</a></p>
+ <p><b>NFL, NBA, NHL and MLB</b> forecasts use a rating model derived from current win percentage and point differential, converted to win probability with a logistic (Elo-style) curve plus a sport-specific home edge. <a href="learn/elo-ratings-explained.html">How Elo works →</a></p>
+ <p><b>Fair odds</b> are simply 1 ÷ probability — the price at which the forecast would be break-even. They are shown for education only.</p>
+ <div class="callout"><span class="badge-18">18+</span>Predictions are statistical estimates for entertainment and education. They are not advice to gamble. BetNow.tv does not take wagers or link to sportsbooks. <a href="responsible-gaming.html">Responsible gaming</a></div>
+ <h2>Limitations</h2>
+ <ul><li>Early-season tables are noisy; probabilities regress toward 50/50 when few games are played.</li><li>Models do not see late injury news, rotation or weather.</li><li>Ties in US sports are rare and treated as a split.</li></ul>
+</div></section>
+<section><div class="container">{% include lead.html %}</div></section>

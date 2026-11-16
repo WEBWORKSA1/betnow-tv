@@ -1,0 +1,25 @@
+---
+layout: default
+title: "Free Odds Converter & Probability Calculators | BetNow.tv"
+description: "Free odds converter, margin calculator, expected value, Poisson score predictor and Elo win probability tools. Learn the math behind sports prices."
+canon: "https://betnow.tv/tools.html"
+og: "website"
+p: ""
+ld: "{\"@context\": \"https://schema.org\", \"@type\": \"WebPage\", \"name\": \"Free Odds Converter & Probability Calculators | BetNow.tv\", \"url\": \"https://betnow.tv/tools.html\", \"description\": \"Free odds converter, margin calculator, expected value, Poisson score predictor and Elo win probability tools. Learn the math behind sports prices.\", \"isPartOf\": {\"@type\": \"WebSite\", \"name\": \"BetNow.tv\", \"url\": \"https://betnow.tv/\"}}"
+---
+<section class="page-hero"><div class="container"><div class="breadcrumb"><a href="index.html">Home</a> / Tools</div><span class="eyebrow">Free calculators</span><h1>Odds & probability tools</h1><p class="mt">Six fast, free calculators that turn prices and ratings into probabilities. Built for learning, analysis and fantasy decisions.</p></div></section>
+<section style="padding-top:10px"><div class="container grid g2">
+<article class="card tool" id="odds"><div class="icon">🔁</div><h3>Odds converter</h3><p>Convert any format and see implied probability.</p><div class="row"><div><label for="oc-fmt">Format</label><select id="oc-fmt"><option value="dec">Decimal (2.50)</option><option value="us">American (+150 / -200)</option><option value="frac">Fractional (3/2)</option></select></div><div><label for="oc-in">Odds</label><input id="oc-in" value="2.50"></div></div>
+<div class="kv" id="oc-out"></div><p class="mt" style="font-size:.85rem"><a href="learn/how-sports-odds-work.html">Learn the math →</a></p></article>
+<article class="card tool" id="margin"><div class="icon">⚖️</div><h3>Margin & fair probability</h3><p>Enter 2 or 3 decimal prices for one market.</p><div class="row"><div><label for="mg-a">Outcome A</label><input id="mg-a" type="number" step="0.01" value="2.10"></div><div><label for="mg-b">Outcome B</label><input id="mg-b" type="number" step="0.01" value="3.40"></div></div><label for="mg-c">Outcome C (optional)</label><input id="mg-c" type="number" step="0.01" value="3.60">
+<div class="kv" id="mg-out"></div><p class="mt" style="font-size:.85rem"><a href="learn/implied-probability-and-margin.html">Learn the math →</a></p></article>
+<article class="card tool" id="ev"><div class="icon">📐</div><h3>Expected value</h3><p>Your probability vs a decimal price.</p><div class="row"><div><label for="ev-p">Your probability %</label><input id="ev-p" type="number" value="45"></div><div><label for="ev-o">Decimal price</label><input id="ev-o" type="number" step="0.01" value="2.40"></div></div>
+<div class="kv" id="ev-out"></div><p class="mt" style="font-size:.85rem"><a href="learn/expected-value-explained.html">Learn the math →</a></p></article>
+<article class="card tool" id="poisson"><div class="icon">⚽</div><h3>Poisson score predictor</h3><p>Expected goals for each side.</p><div class="row"><div><label for="po-h">Home expected goals</label><input id="po-h" type="number" step="0.1" value="1.6"></div><div><label for="po-a">Away expected goals</label><input id="po-a" type="number" step="0.1" value="1.1"></div></div>
+<div class="kv" id="po-out"></div><p class="mt" style="font-size:.85rem"><a href="learn/poisson-soccer-predictions.html">Learn the math →</a></p></article>
+<article class="card tool" id="elo"><div class="icon">🏆</div><h3>Elo win probability</h3><p>Ratings plus home advantage.</p><div class="row"><div><label for="el-a">Team A rating</label><input id="el-a" type="number" value="1600"></div><div><label for="el-b">Team B rating</label><input id="el-b" type="number" value="1500"></div></div><label for="el-h">Home advantage for A (points)</label><input id="el-h" type="number" value="65">
+<div class="kv" id="el-out"></div><p class="mt" style="font-size:.85rem"><a href="learn/elo-ratings-explained.html">Learn the math →</a></p></article>
+<article class="card tool" id="bankroll"><div class="icon">📈</div><h3>Compounding simulator</h3><p>See how a small % per period compounds — and how fast negative % erodes.</p><div class="row"><div><label for="br-s">Starting value</label><input id="br-s" type="number" value="1000"></div><div><label for="br-r">% change per period</label><input id="br-r" type="number" step="0.1" value="-2"></div></div><label for="br-n">Periods</label><input id="br-n" type="number" value="52">
+<div class="kv" id="br-out"></div><p class="mt" style="font-size:.85rem"><a href="learn/variance-and-sample-size.html">Learn the math →</a></p></article>
+</div></section>
+<section><div class="container">{% include lead.html %}</div></section>

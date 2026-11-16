@@ -1,0 +1,10 @@
+# GitHub Pages (main branch) — shared layout for all pages
+title: BetNow.tv
+exclude:
+  - scripts
+  - setup
+  - README.md
+  - PROMPT.md
+  - RESEARCH.md
+include:
+  - ads.txt
