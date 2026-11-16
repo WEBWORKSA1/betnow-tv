@@ -9,11 +9,12 @@ Free sports predictions, odds-math education, official highlight videos and free
 - All forms post to a private inbox via FormSubmit; the address is assembled at runtime and never appears in source.
 
 ## One-time setup
-1. **Pages:** Settings → Pages → Source: **GitHub Actions** (the workflow tries to enable this automatically).
-2. **FormSubmit activation:** the first form submission triggers a one-time "Activate form" email to the inbox. Click it once.
-3. **Donation links:** paste PayPal / Buy Me a Coffee / Stripe / Patreon links into `assets/js/config.js`.
-4. **Custom domain:** at the registrar add A records `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153` and `www` CNAME → `webworksa1.github.io`. Then Settings → Pages → Custom domain `betnow.tv` → Enforce HTTPS.
-5. **AdSense:** add site `betnow.tv` in AdSense; `ads.txt` is already in place. Submit `https://betnow.tv/sitemap.xml` to Search Console.
+1. **Activate automation (2 min):** on GitHub open *Add file → Create new file*, name it `.github/workflows/update-data.yml`, paste the contents of `setup/update-data.yml`, and commit to `main`. The first run builds all 27 pages, pulls live fixtures/predictions/news and deploys.
+2. **Pages:** Settings → Pages → Build and deployment → Source: **GitHub Actions**. Then Actions → "Build, auto-update & deploy BetNow.tv" → *Run workflow*.
+3. **FormSubmit activation:** the first form submission triggers a one-time "Activate form" email to the inbox. Click it once.
+4. **Donation links:** paste PayPal / Buy Me a Coffee / Stripe / Patreon links into `assets/js/config.js`.
+5. **Custom domain:** at the registrar add A records `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153` and `www` CNAME → `webworksa1.github.io`. Then Settings → Pages → Custom domain `betnow.tv` → Enforce HTTPS.
+6. **AdSense:** add site `betnow.tv` in AdSense; `ads.txt` is already in place. Submit `https://betnow.tv/sitemap.xml` to Search Console.
 
 ## Edit content
 Edit the files in `scripts/`, then push. The workflow rebuilds every page. Local build: `python3 scripts/build.py`.
