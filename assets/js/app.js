@@ -89,9 +89,28 @@ function matchCard(m){
       <button data-pick="H" class="${p==="H"?"on":""}">${m.home.split(" ")[0]}</button>${draw?`<button data-pick="D" class="${p==="D"?"on":""}">Draw</button>`:""}<button data-pick="A" class="${p==="A"?"on":""}">${m.away.split(" ")[0]}</button>
     </div></article>`;
 }
+/* live fallback: pull fixtures straight from ESPN's public scoreboard in the browser */
+const LG=[["Premier League","soccer/eng.1",1,0],["LaLiga","soccer/esp.1",1,0],["Champions League","soccer/uefa.champions",1,0],["NFL","football/nfl",0,.03],["NBA","basketball/nba",0,.035],["NHL","hockey/nhl",0,.025],["MLB","baseball/mlb",0,.02]];
+const ymd=d=>d.toISOString().slice(0,10).replace(/-/g,"");
+function rec(c){const s=((c.records||[])[0]||{}).summary||"";const p=s.split("-").map(Number);if(p.some(isNaN)||!p.length)return null;return p}
+function poisH(lh,la){const f=k=>k<2?1:k*f(k-1),P=(l,k)=>Math.exp(-l)*Math.pow(l,k)/f(k);let H=0,D=0,A=0;for(let i=0;i<=10;i++)for(let j=0;j<=10;j++){const p=P(lh,i)*P(la,j);i>j?H+=p:i===j?D+=p:A+=p}D*=1.06;const s=H+D+A;return[H/s,D/s,A/s]}
+function predictLive(h,a,soc,edge){const rh=rec(h),ra=rec(a);
+  if(soc){const st=r=>{if(!r||r.length<3)return 1;const g=r[0]+r[1]+r[2],ppg=g?(3*r[0]+r[1])/g:1.37;return((ppg*g+1.37*6)/(g+6))/1.37};
+    const sh=st(rh),sa=st(ra);return poisH(1.45*Math.sqrt(sh/sa),1.15*Math.sqrt(sa/sh))}
+  const wp=r=>{if(!r)return .5;const w=r[0],g=r.reduce((x,y)=>x+y,0);return Math.min(.95,Math.max(.05,(w+2.5)/(g+5)))};
+  const A=wp(rh),B=wp(ra),den=A+B-2*A*B;let p=(den?(A-A*B)/den:.5)+edge;p=Math.min(.97,Math.max(.03,p));return[p,null,1-p]}
+async function liveFixtures(){const now=new Date(),end=new Date(Date.now()+7*864e5),out=[];
+  await Promise.all(LG.map(async([label,path,soc,edge])=>{try{const js=await getJSON(`https://site.api.espn.com/apis/site/v2/sports/${path}/scoreboard?dates=${ymd(now)}-${ymd(end)}&limit=200`);
+    (js.events||[]).forEach(ev=>{const c=ev.competitions[0];if(c.status&&c.status.type&&c.status.type.completed)return;const t={};c.competitors.forEach(x=>t[x.homeAway]=x);if(!t.home||!t.away)return;
+      const [pH,pD,pA]=predictLive(t.home,t.away,soc,edge);out.push({id:ev.id,league:label,date:ev.date,home:t.home.team.displayName,away:t.away.team.displayName,pH,pD,pA})})}catch(e){}}));
+  return{updated:new Date().toISOString(),matches:out}}
+async function liveNews(){const feeds=["football/nfl","basketball/nba","soccer/eng.1","hockey/nhl","baseball/mlb"],items=[];
+  await Promise.all(feeds.map(async f=>{try{const js=await getJSON(`https://site.api.espn.com/apis/site/v2/sports/${f}/news?limit=12`);(js.articles||[]).forEach(a=>{const l=((a.links||{}).web||{}).href;if(l)items.push({title:a.headline,link:l,source:"ESPN",summary:a.description||"",date:a.published})})}catch(e){}}));
+  items.sort((a,b)=>new Date(b.date)-new Date(a.date));return{items}}
 async function loadFixtures(){
   const box=$("#fixtures"); if(!box)return;
-  let data; try{data=await getJSON("data/fixtures.json")}catch(e){box.innerHTML='<p class="muted">Fixtures are refreshing — check back shortly.</p>';return}
+  let data; try{data=await getJSON("data/fixtures.json")}catch(e){data={matches:[]}}
+  if(!data.matches||!data.matches.length||Date.now()-new Date(data.updated)>12*3600e3){const live=await liveFixtures();if(live.matches.length)data=live}
   const limit=+box.dataset.limit||999, upd=$("#fxUpdated"); if(upd)upd.textContent=new Date(data.updated).toLocaleString();
   const now=Date.now()-3*3600e3;
   if(!data.matches||!data.matches.length){box.innerHTML='<div class="card"><h3>Fresh predictions are on the way</h3><p>Our model refreshes fixtures every 6 hours. Meanwhile, try the <a href="tools.html">calculators</a> or today\'s trivia.</p></div>';return}
@@ -112,7 +131,8 @@ function updatePickCount(){const n=Object.keys(store.get("bn-picks",{})).length;
 async function loadNews(){
   const box=$("#news"), tk=$("#ticker");
   if(!box&&!tk)return;
-  let d; try{d=await getJSON("data/news.json")}catch(e){return}
+  let d; try{d=await getJSON("data/news.json")}catch(e){d={items:[]}}
+  if(!d.items||!d.items.length){d=await liveNews()}
   const items=d.items||[];
   if(box){const lim=+box.dataset.limit||24;box.innerHTML=items.slice(0,lim).map(n=>`<article class="card news-item"><span class="tag ${n.sport==="Soccer"?"lime":""}">${n.source||"News"}</span><h3><a href="${n.link}" target="_blank" rel="noopener nofollow">${n.title}</a></h3>${n.summary?`<p>${n.summary}</p>`:""}<time>${n.date?fmtDate(n.date):""}</time></article>`).join("")}
   if(tk&&items.length){const s=items.slice(0,14).map(n=>`<span><b>●</b> ${n.title}</span>`).join("");tk.innerHTML=s+s}
